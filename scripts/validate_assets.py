@@ -1,10 +1,27 @@
 #!/usr/bin/env python3
-"""Validate a generated e-commerce asset folder without changing files."""
+"""Validate PNG dimensions in a generated e-commerce asset folder.
+
+Only Python's standard library is used so the skill can run after a plain clone.
+"""
 
 from __future__ import annotations
 
 import argparse
+import struct
 from pathlib import Path
+
+
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+
+
+def read_png_size(path: Path) -> tuple[int, int]:
+    """Read width and height from a PNG IHDR without third-party packages."""
+    with path.open("rb") as stream:
+        header = stream.read(24)
+    if len(header) < 24 or header[:8] != PNG_SIGNATURE or header[12:16] != b"IHDR":
+        raise ValueError("not a valid PNG with an IHDR header")
+    width, height = struct.unpack(">II", header[16:24])
+    return width, height
 
 
 def main() -> int:
@@ -15,18 +32,13 @@ def main() -> int:
     parser.add_argument("--expected", type=int, default=None, help="Optional expected PNG count")
     args = parser.parse_args()
 
-    try:
-        from PIL import Image
-    except ImportError as exc:
-        raise SystemExit("Pillow is required: python3 -m pip install pillow") from exc
-
     files = sorted(args.root.rglob("*.png"))
     wrong = []
     for path in files:
         try:
-            with Image.open(path) as image:
-                if image.size != (args.width, args.height):
-                    wrong.append(f"{path}: {image.size[0]}x{image.size[1]}")
+            width, height = read_png_size(path)
+            if (width, height) != (args.width, args.height):
+                wrong.append(f"{path}: {width}x{height}")
         except Exception as exc:  # pragma: no cover - diagnostic path
             wrong.append(f"{path}: unreadable ({exc})")
 
