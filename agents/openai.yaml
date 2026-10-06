@@ -1,0 +1,7 @@
+interface:
+  display_name: "辉如雨详情页设计"
+  short_description: "从产品资料到详情页结构、文案与成品图的一体化制作流程"
+  default_prompt: "使用 $huiruyu-xiangiqngye，为这个产品从竞品逻辑、用户痛点、页面结构、文案到逐屏生图和验收交付完整执行。"
+
+policy:
+  allow_implicit_invocation: true
