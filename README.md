@@ -6,13 +6,21 @@
 
 ## 安装
 
-将仓库克隆到 Codex 的 skills 目录：
+把这句话交给支持安装 Skill 的 Agent：
 
-```bash
-git clone https://github.com/ihuihuihui/huiruyu-xiangqingye.git ~/.codex/skills/huiruyu-xiangqingye
+```text
+请帮我安装这个 Skill：https://github.com/ihuihuihui/huiruyu-xiangqingye
 ```
 
-如果你的 Codex 使用其他 skills 路径，请将仓库放入对应目录。仓库已经包含 skill 所需的说明、模板、脚本和 MIT 许可证，不需要额外安装 Python 包、字体、外部 skill 或项目文件。
+或者在终端运行：
+
+```bash
+npx skills add ihuihuihui/huiruyu-xiangqingye
+```
+
+终端安装需要 Node.js（含 npx），默认安装到当前项目。如果希望 Codex 在所有项目中都能使用，在命令末尾加上 `--agent codex --global`。安装命令和选项见 [Skills CLI 官方说明](https://github.com/vercel-labs/skills#install-a-skill)。
+
+仓库已包含 skill 所需的说明、模板、脚本和 MIT 许可证，无需另装外部 skill、Python 包或字体。装好后即可上传产品图，调用 `$huiruyu-xiangqingye` 开始制作；图片生成、图片查看和联网研究需要宿主 Agent 提供对应能力，详见下方运行依赖说明。
 
 ## 使用
 
