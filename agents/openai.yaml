@@ -1,7 +1,7 @@
 interface:
   display_name: "辉如雨详情页设计"
-  short_description: "先核对平台与素材，锁定产品外观，完成详情页策划、文案与生图验收"
-  default_prompt: "使用 $huiruyu-xiangqingye，先检查目标平台、产品素材和资料是否完整，确认缺项的创作范围，再保持原始产品一致性完成详情页策划、文案、生图与验收。"
+  short_description: "先核对资料与平台，完成十步详情页策划，经用户确认后再生图验收"
+  default_prompt: "使用 $huiruyu-xiangqingye，先检查平台、产品多视角/细节/实拍、介绍卖点、尺寸材质和使用场景；资料不足先询问或共同确定。按竞品拆解、用户痛点、转化结构、文案、逐屏执行说明、关键信息核定、页面框架、逐屏标题、逐屏正文的十步流程交付规划包，得到用户确认后再生成并验收视觉成品。"
 
 policy:
   allow_implicit_invocation: true
